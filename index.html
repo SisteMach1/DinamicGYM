@@ -35,6 +35,16 @@ body{background:#050507;color:#fff;min-height:100vh;overflow-x:hidden;position:r
 .search-row{display:flex;gap:8px;margin-top:18px}
 @media(max-width:600px){.search-row{flex-wrap:wrap}.search-row .input{flex:1 1 100%}}
 </style>
+
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<meta name="theme-color" content="#FF0A2A">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="DINAMIC GYM">
+
 </head>
 <body>
 <div class="bg-animated"></div>
@@ -172,5 +182,15 @@ function importJSON(e){let f=e.target.files[0];if(!f)return;let r=new FileReader
 function downloadTicket(id){let c=clientes.find(x=>x.id===id);let canvas=document.getElementById('cnv');let w=400,h=650;canvas.width=w*2;canvas.height=h*2;let ctx=canvas.getContext('2d');ctx.scale(2,2);ctx.fillStyle='#fff';ctx.fillRect(0,0,w,h);ctx.fillStyle='#000';ctx.font='900 11px sans-serif';ctx.fillText('DINAMIC GYM',150,30);ctx.font='900 24px sans-serif';ctx.fillText('DINAMIC',130,65);ctx.fillText('GYM',160,92);ctx.fillStyle='#FFD60A';ctx.beginPath();ctx.roundRect(120,108,160,26,13);ctx.fill();ctx.fillStyle='#000';ctx.font='900 11px sans-serif';ctx.fillText('TICKET PAGADO ✓',140,125);ctx.font='700 10px sans-serif';ctx.fillText('CLIENTE: '+c.nombre.toUpperCase(),20,185);ctx.fillText('FECHA ABONO: '+fmt(c.fechaAbono),20,210);ctx.fillText('VENCIMIENTO: '+fmt(c.fechaVenc),20,235);ctx.fillText('MONTO: $'+c.monto,20,260);let a=document.createElement('a');a.download='ticket_'+c.nombre.replace(/\s+/g,'_')+'.png';a.href=canvas.toDataURL('image/png');a.click();}
 initAuth();
 </script>
+
+<script>
+// PWA Service Worker simple para offline
+if('serviceWorker' in navigator){
+  window.addEventListener('load', ()=>{
+    navigator.serviceWorker.register('./sw.js').catch(()=>{});
+  });
+}
+</script>
+
 </body>
 </html>
