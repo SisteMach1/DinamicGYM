@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>DINAMIC GYM - Gestión</title>
+    <meta name="description" content="Sistema privado de gestión de clientes DINAMIC GYM" />
+    <meta name="theme-color" content="#FF1A1A" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- SECURITY HEADERS - Nivel Distribuidora Biglia -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self'; img-src 'self' data: blob:; frame-ancestors 'none';">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Referrer-Policy" content="no-referrer">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), camera=(), microphone=()">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      if('serviceWorker' in navigator){
+        window.addEventListener('load', ()=> navigator.serviceWorker.register('/sw.js'))
+      }
+      // Anti-clickjacking
+      if(window.top !== window.self){ window.top.location = window.self.location; }
+    </script>
+  </body>
+</html>
